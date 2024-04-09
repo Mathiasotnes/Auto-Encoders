@@ -62,7 +62,7 @@ class StackedMNISTData:
     channel 1 counting the tens for the green channel, and channel 2 counting the hundreds for the blue.
     """
 
-    def __init__(self, mode: DataMode, default_batch_size: np.int64 = 256) -> None:
+    def __init__(self, mode: DataMode, default_batch_size: np.int64 = 256):
         # Load MNIST and put in internals
         self.default_batch_size = default_batch_size
 
@@ -99,7 +99,7 @@ class StackedMNISTData:
         self.train_images, self.train_labels = self.__prepare_data_set(training=True)
         self.test_images, self.test_labels = self.__prepare_data_set(training=False)
 
-    def get_full_data_set(self, training: bool = True) -> tuple:
+    def get_full_data_set(self, training: bool = True):
         """
         Get the full, prepared dataset. Since the dataset is so small, this works well.
         Then we cans end it directly to keras' fit-method
@@ -111,7 +111,7 @@ class StackedMNISTData:
             images, classes = self.test_images, self.test_labels
         return images, classes
 
-    def __prepare_data_set(self, training: bool = True) -> tuple:
+    def __prepare_data_set(self, training: bool = True):
         """
         Do transformations of the data as needed: Make binary, stacking, rescaling
         """
@@ -157,7 +157,7 @@ class StackedMNISTData:
 
         return images, labels
 
-    def get_random_batch(self, training: bool = True, batch_size: np.int64 = None) -> tuple:
+    def get_random_batch(self, training: bool = True, batch_size: np.int64 = None):
         """
         Generate a batch of data. We can choose to use training or testing data.
         Also, we can ask for a specific batch-size (if we don't, we use the default
@@ -181,7 +181,7 @@ class StackedMNISTData:
 
         return images, labels
 
-    def batch_generator(self, training: bool = True, batch_size: np.int64 = None) -> tuple:
+    def batch_generator(self, training: bool = True, batch_size: np.int64 = None):
         """
         Create a  batch generator. We can choose to use training or testing data.
         Also, we can ask for a specific batch-size (if we don't, we use the default
@@ -206,7 +206,7 @@ class StackedMNISTData:
             yield images[start_position:end_position],  labels[start_position:end_position]
             start_position = end_position
 
-    def plot_example(self, images: np.ndarray = None, labels: np.ndarray = None) -> None:
+    def plot_example(self, images: np.ndarray = None, labels: np.ndarray = None):
         """
         Plot data in RGB (3-channel data) or monochrome (one-channel data).
         If data is submitted, we need to generate an example.

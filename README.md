@@ -18,7 +18,7 @@ convolutional neural network with stride > 1.
 
 # Implementation status
 
-### AE-BASIC X
+### AE-BASIC √
 Implement the autoencoder, learn from standard MNIST data, and show reconstruction results.
 
 ### AE-GEN X

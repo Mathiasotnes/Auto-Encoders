@@ -7,7 +7,7 @@ import numpy as np
 
 class VerificationNet:
 
-    def __init__(self, force_learn: bool = False, file_name: str = "./models/verification_model/verification_model") -> None:
+    def __init__(self, force_learn: bool = False, file_name: str = "./models/verification_model/verification_model"):
         """
         Define model and set some parameters.
         The model is made for classifying one channel only -- if we are looking at a
@@ -48,7 +48,7 @@ class VerificationNet:
 
         return done_training
 
-    def train(self, generator: StackedMNISTData, epochs: np.int64 = 10) -> bool:
+    def train(self, generator: StackedMNISTData, epochs: np.int64 = 10):
         """
         Train model if required. As we have a one-channel model we take care to
         only use the first channel of the data.
@@ -76,7 +76,7 @@ class VerificationNet:
 
         return self.done_training
 
-    def predict(self, data: np.ndarray) -> tuple:
+    def predict(self, data: np.ndarray):
         """
         Predict the classes of some specific data-set. This is basically prediction using keras, but
         this method is supporting multi-channel inputs.
@@ -105,7 +105,7 @@ class VerificationNet:
 
         return predictions, beliefs
 
-    def check_class_coverage(self, data: np.ndarray, tolerance: float = .8) -> float:
+    def check_class_coverage(self, data: np.ndarray, tolerance: float = .8):
         """
         Out of the total number of classes that can be generated, how many are in the data-set?
         I'll only could samples for which the network asserts there is at least tolerance probability
@@ -123,7 +123,7 @@ class VerificationNet:
 
     def check_predictability(self, data: np.ndarray,
                              correct_labels: list = None,
-                             tolerance: float = .8) -> tuple:
+                             tolerance: float = .8):
         """
         Out of the number of data points retrieved, how many are we able to make predictions about?
         ... and do we guess right??
