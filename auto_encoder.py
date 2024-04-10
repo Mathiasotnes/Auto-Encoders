@@ -194,14 +194,14 @@ class AutoEncoderNet:
 
 if __name__ == "__main__":
     gen = StackedMNISTData(mode=DataMode.COLOR_BINARY_COMPLETE, default_batch_size=2048)
-    net = AutoEncoderNet(mode='mono', encoding_dim=128, file_name="./models/autoencoder/autoencoder_missing")
-    net.train(generator=gen, epochs=10)
+    net = AutoEncoderNet(mode='color', encoding_dim=128, file_name="./models/autoencoder/autoencoder_color")
+    net.train(generator=gen, epochs=15)
 
     # Reconstruct some images
-    # net.show_reconstructions(generator=gen, num_images=10)
+    net.show_reconstructions(generator=gen, num_images=10)
 
     # Generate new images
-    # net.show_generated_images(num_images=10)
+    net.show_generated_images(num_images=10)
 
     # Display images with the highest reconstruction error
     net.display_anomalies(generator=gen, num_images=10)
@@ -222,7 +222,7 @@ Generation
 ----------
 The auto encoder can generate new images from random noise, but the generated images look nothing like hand-writing. This
 is because we don't know the representation of the encoded images, and choosing random noise for the encoded images doesn't
-produce meaningful results.
+produce meaningful results. The smaller the encoding dimension is, the more it looks like a real number.
 
 -----------------
 Anomaly Detection
@@ -238,13 +238,19 @@ To make the model support colors, I added the 'mode' parameter to the AutoEncode
 for one-channel images or 'color' for three-channel images. The code uses this parameter to decide how to treat the data in
 other parts of the code.
 
-Pre-trained models include:
-'./models/autoencoder/autoencoder' for one-channel images (complete)
-'./models/autoencoder/autoencoder_missing' for one-channel images (incomplete)
-'./models/autoencoder/autoencoder_color' for three-channel images (complete)
-'./models/autoencoder/autoencoder_color_missing' for three-channel images (incomplete)
 
 It's a red flag the the auto encoder trained on a missing value gives the same anomalies as the complete auto encoder. Figure
 out which number is actually missing, and check if the auto encoder can detect it.
+
+------------------
+Pre-trained models
+------------------
+
+'./models/autoencoder/autoencoder'               |   one-channel images    |   complete     |   latent dimension: 128
+'./models/autoencoder/autoencoder_missing'       |   one-channel images    |   missing      |   latent dimension: 128
+'./models/autoencoder/autoencoder_color'         |   three-channel images  |   complete     |   latent dimension: 128
+'./models/autoencoder/autoencoder_color_missing' |   three-channel images  |   missing      |   latent dimension: 128
+'./models/autoencoder/autoencoder_small'         |   one-channel images    |   complete     |   latent dimension: 24
+'./models/autoencoder/autoencoder_supersmall'    |   one-channel images    |   complete     |   latent dimension: 8
 
 """
